@@ -1,22 +1,39 @@
+
 syntax = "proto3";
 
 option java_multiple_files = true;
 option java_package = "com.xcbeyond.springboot.grpc.lib";
-option java_outer_classname = "HelloWorldProto";
+option java_outer_classname = "UserProto";
 
-// The greeting service definition.
-service Simple {
-    // Sends a greeting
-    rpc SayHello (HelloRequest) returns (HelloReply) {
+import "google/protobuf/any.proto";
+// The user service definition.
+service UserService {
+    // query one user by name
+    rpc queryUserByName (UserName) returns (Reply) {
+    }
+    //batch insert users
+    rpc batchInsertUsers (BatchUser) returns (Reply) {
     }
 }
 
 // The request message containing the user's name.
-message HelloRequest {
+message UserName {
     string name = 1;
 }
 
-// The response message containing the greetings
-message HelloReply {
-    string message = 1;
+// The request message containing the user's information.
+message BatchUser {
+    repeated User users = 1;
+    message User {
+        int32 age = 1;
+        string name = 2;
+        int64 id_number = 3;
+    }
+}
+
+// The response message containing the code,des,result
+message Reply {
+    int64 code = 1;
+    string des = 2;
+    google.protobuf.Any result = 3;
 }
