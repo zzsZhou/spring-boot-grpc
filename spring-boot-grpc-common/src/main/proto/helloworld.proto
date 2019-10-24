@@ -14,11 +14,22 @@ service UserService {
     //batch insert users
     rpc batchInsertUsers (BatchUser) returns (Reply) {
     }
+    // query one user by name
+    rpc queryUsersByAge (UserAge) returns (stream Reply) {
+    }
+
+    rpc queryUsersByNames (stream UserName) returns (stream Reply) {
+    }
 }
 
 // The request message containing the user's name.
 message UserName {
     string name = 1;
+}
+
+// The request message containing the user's name.
+message UserAge {
+    int32 age = 1;
 }
 
 // The request message containing the user's information.

@@ -27,4 +27,17 @@ public class GrpcClientController {
     public String queryUserInfo(@PathVariable("user_name")String userName){
         return grpcClientService.queryUser(userName);
     }
+
+
+    @GetMapping
+    public String queryUsersByAge(@RequestParam("age") Integer age){
+        return grpcClientService.queryUsersByAge(age);
+    }
+
+
+    @GetMapping("/names")
+    public String queryUsersByNames(@RequestParam("names") String names){
+        String[] nameArray = names.split("\\*");
+        return grpcClientService.queryUsersByNames(nameArray);
+    }
 }
